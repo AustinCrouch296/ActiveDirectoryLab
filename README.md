@@ -41,7 +41,17 @@ Press OK.<br />
 
 Select the Virtual Machine again, and press Start.<br />
 Once it loads, you will be asked to link the Windows ISO. Link the Server 2019 ISO and press "Mount and Retry Boot".<br />
-The next steps will take place inside of Windows.
+The next steps will take place inside of Windows!
+
+Continue through the Windows Setup wizard, these are the options you should select when prompted to:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the operating system you want to install"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Windows Server 2019 Standard Evaluation (Desktop Experience)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which type of installation do you want?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom: Install Windows only (advanced)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click next to following screen to select the default partition.<br />
+Customize Settings:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: Password1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(To keep the lab simple, I suggest using the same password throughout the entire lab.)<br />
 
 #### Configuring NICs (Internal/External Networks)
 Open and navigate to the Control Panel > Network and Intenet > Network and Sharing Center > Change Adapter Settings<br />
