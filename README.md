@@ -25,7 +25,7 @@ For the following setup screens, these are the options I used:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Virtual Hard Disk:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disk Space: 20.00 GB<br />
 
-Select the Virtual Machine you have just created, and press Settings.<br />
+Select the Virtual Machine you have just created, and press Settings:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General > Advanced<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shared Clipboard:&nbsp;Bidirectional<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drag'n'Drop:&nbsp;Bidirectional<br />
@@ -40,8 +40,8 @@ Select the Virtual Machine you have just created, and press Settings.<br />
 Press OK.<br />
 
 Select the Virtual Machine again, and press Start.<br />
-Once it loads, VirtualBox will prompt you to link the Windows ISO, link the Server 2019 ISO and press "Mount and Retry Boot".<br />
-From here, we will be working in Windows!
+Once it loads, you will be asked to link the Windows ISO. Link the Server 2019 ISO and press "Mount and Retry Boot".<br />
+The next steps will take place inside of Windows.
 
 #### Configuring NICs (Internal/External Networks)
 Open and navigate to the Control Panel > Network and Intenet > Network and Sharing Center > Change Adapter Settings<br />
