@@ -2,16 +2,16 @@
 <img src="/images/main_diagram.png">
 
 ## Introduction
-In this lab, I will explain the procedures necessary to set up and configure an Active Directory Domain Controller, a Windows 10 client machine, and create 1k+ user accounts using a PowerShell script, and create a simulated real-world network environment that can be used to explore Active Directory, Group Policy, and 
+In this lab, I will explain the procedures necessary to set up and configure an Active Directory Domain Controller, a Windows 10 client machine, and create 1k+ user accounts using a PowerShell script, to create a simulated real-world network environment that can be used to explore Active Directory, Group Policy, and troubleshoot common issues.
 
 ### Files necessary to follow along:
-<a href="https://www.virtualbox.org/wiki/Downloads">Oracle VirtualBox</a><br />
-<a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019">Windows Server 2019 ISO</a><br />
-<a href="https://www.microsoft.com/en-us/software-download/windows10">Windows 10 ISO</a><br />
-<a href="https://github.com/joshmadakor1/AD_PS">PowerShell Create Accounts Script (GitHub)</a>
+[Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)<br />
+[Windows Server 2019 ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)<br />
+[Windows 10 ISO](https://www.microsoft.com/en-us/software-download/windows10)</a><br />
+[PowerShell Create Accounts Script (GitHub)](https://github.com/joshmadakor1/AD_PS)</a>
 
 ## Procedures
-### Creating a Windows Server 2019 Virtual Machine
+### **Creating a Windows Server 2019 Virtual Machine**
 Download and open Oracle VM VirtualBox.
 
 Click Machine > New, and add a name for your Domain Controller ("DC" or "DomainController").<br />
@@ -37,29 +37,31 @@ Select the Virtual Machine you have just created, and press Settings:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enable Network Adapter: True<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attached to: Internal Network<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: intnet<br />
-Press OK.<br />
 
-Select the Virtual Machine again, and press Start.<br />
-Once it loads, you will be asked to link the Windows ISO. Link the Server 2019 ISO and press "Mount and Retry Boot".<br />
-The next steps will take place inside of Windows!
+Select OK, click the Virtual Machine again, and select Start.<br />
+The virtual machine will load and ask you to link an ISO file. br />
+Download and link the Server 2019 ISO and press "Mount and Retry Boot".<br />
+*We now have the Virtual Machine setup, the next steps will take place inside of Windows!*
 
-Continue through the Windows Setup wizard, these are the options you should select when prompted to:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the operating system you want to install"<br />
+### **The Windows Setup Wizard**
+
+Continuing through the Windows Setup wizard, these are the options you should select when prompted to:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the operating system you want to install.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Windows Server 2019 Standard Evaluation (Desktop Experience)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which type of installation do you want?<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom: Install Windows only (advanced)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click next to following screen to select the default partition.<br />
-Customize Settings:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: Password1<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(To keep the lab simple, I suggest using the same password throughout the entire lab.)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customize Settings:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: Password1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(To keep the lab simple, I suggest using the same password throughout the entire lab.)<br />
 
-#### Configuring NICs (Internal/External Networks)
-Open and navigate to the Control Panel > Network and Intenet > Network and Sharing Center > Change Adapter Settings<br />
-Right click on "Ethernet" > select Status.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It should display "IPv4 Connectivity: Internet".<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Close the window, right-click on "Ethernet" again, choose Rename > and set the name to "_INTERNET_".<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After that, right-click on "Ethernet 2", choose Rename > and set the name to "_INTNET_".<br />
-This will help us more easily identify them.<br />
+### **Configuring NICs (Internal/External Networks)**
+Navigate to Control Panel > Network and Internet > Network and Sharing Center > Change Adapter Settings.<br />
+Right click on the adapter named "Ethernet" > select Status.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify that it displays "IPv4 Connectivity: Internet", and close the window.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "Ethernet" again, choose Rename > and set the name to "\_INTERNET\_".<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "Ethernet 2", choose Rename > and set the name to "\_INTNET\_".<br />
+This will help make our networks more easily identifiable in the future.<br />
 
 We will now change the IPv4 settings of the internal network to those in the diagram above.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "_INTNET_" > select Properties.<br />
@@ -69,28 +71,81 @@ We will now change the IPv4 settings of the internal network to those in the dia
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mask: 255.255.255.0<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gateway: &lt;empty&gt;<br />
         
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Preferred DNS server: 127.0.0.1<br />(Loopback address)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Preferred DNS server: 127.0.0.1 (Loopback address)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alternate DNS server: &lt;empty&gt;<br />
 
-#### Renaming the PC
+### **Renaming the PC**
 Right-click on the Start Menu > select System.<br />
-Click "Rename this PC".<br />
+Click the "Rename this PC" button.<br />
 Change the name of the device to "DC" for Domain Controller.<br />
-Click Restart now to apply the changes we have made so far.<br />
+Choose the option to Restart now to apply the changes we have made so far.<br />
 
-#### Configuring Active Directory Domain Services
+### **Configuring Active Directory Domain Services**
+Now that we have configured our NICs, the next step is to setup our Domain (Active Directory Domain Server).<br />
 
-#### Configuring Remote Access Server (RAS)/NAT
+Open Server Manager > select "Add roles and features". <br />
+Click next until you get to the Select destination server/Server Selection tab.
+ <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select DC, and click Next.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select Active Directory Domain Services, and click Next.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Next through the rest of the settings, and click Install.<br />
 
-#### Configuring the DHCP Server
+On Server Manager there should now be a Notifications icon (a flag with a yellow caution symbol) in the top right.<br />
+Select it, and select "Promote this server to a domain controller".<br />
+This will open the Active Directory Domain Services Configuration Window, choose the following settings:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deployment Configuration:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the deployment option: Add a new forest.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root domain name: mydomain.com<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domain Controller Options<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password & Confirm Password: Password1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Next through the rest of the settings, and click Install.<br />
 
-##### How to enable internet access from this virtual machine
+Ran AD Domain Services Configuration Wizard on Server Manager
+    Turned on Active Directory Domain Services under Server Roles
+    Post-Deployment: Add a new forest, root name “mydomain.com”
+
+Ran Active Directory Users and Computers
+    Created a new OU, “_ADMINS”, with user a-crouch@mydomain.com
+    Properties -> Member of -> Add -> ‘Domain Admins’
+
+#### **Creating a dedicated domain admin user account**
+Open Active Directory Users and Computers. <br />
+Right-click on mydomain.com > select New > Organizational Unit<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: "_ADMINS"<br />
+Right-click "_ADMINS" group > New > User<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now set up the Admin account with your own information, in this format:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First name: John<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last name: Smith<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User logon name: j-smith @mydomain.com<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Next.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password & Confirm Password: Password1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uncheck "User must change password at next logon"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check "Password never expires"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Next and Finish.<br />
+
+To set your new User Account as a Domain Admin, select the user account, right-click > Properties.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Member Of > Add<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In "Enter the object names to select (examples):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type "domain admins".<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Check Names<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apply the settings.<br />
+
+Now we can sign out of our account, and sign in with our new user account.<br />
+On the Sign-in screen, select Other Users, and enter the credentials for your user. For example:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: j-smith<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: Password1<br />
+
+### **Configuring Remote Access Server (RAS)/NAT**
+
+### **Configuring the DHCP Server**
+
+#### **[How to enable internet access from this virtual machine]**
 *Note in a real production environment, it would NOT be a good idea to allow this*
 
-#### Populating the domain with test accounts using PowerShell
+### **Populating the domain with test accounts using PowerShell**
 
-### Creating a Windows 10 "Client" Virtual Machine
+### **Creating a Windows 10 "Client" Virtual Machine**
 
-### Experimenting with Group Policy 
+### **Experimenting with Group Policy**
 
-## Conclusion
+## *Conclusion*
