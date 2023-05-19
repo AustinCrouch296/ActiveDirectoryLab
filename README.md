@@ -64,7 +64,7 @@ Right click on the adapter named "Ethernet" > select Status.<br />
 This will help make our networks more easily identifiable in the future.<br />
 
 We will now change the IPv4 settings of the internal network to those in the diagram above.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "_INTNET_" > select Properties.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "\_INTNET\_" > select Properties.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Internet Protocol Version 4 (TCP/IPv4) > click Properties.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General > Enable "Use the following IP Address:"<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP address: 172.16.0.1<br />
@@ -100,14 +100,6 @@ This will open the Active Directory Domain Services Configuration Window, choose
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password & Confirm Password: Password1<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click Next through the rest of the settings, and click Install.<br />
 
-Ran AD Domain Services Configuration Wizard on Server Manager
-    Turned on Active Directory Domain Services under Server Roles
-    Post-Deployment: Add a new forest, root name “mydomain.com”
-
-Ran Active Directory Users and Computers
-    Created a new OU, “_ADMINS”, with user a-crouch@mydomain.com
-    Properties -> Member of -> Add -> ‘Domain Admins’
-
 #### **Creating a dedicated domain admin user account**
 Open Active Directory Users and Computers. <br />
 Right-click on mydomain.com > select New > Organizational Unit<br />
@@ -131,7 +123,8 @@ To set your new User Account as a Domain Admin, select the user account, right-c
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apply the settings.<br />
 
 Now we can sign out of our account, and sign in with our new user account.<br />
-On the Sign-in screen, select Other Users, and enter the credentials for your user. For example:<br />
+On the Sign-in screen, select Other Users, and enter the credentials for your user. <br />
+For example:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: j-smith<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: Password1<br />
 
