@@ -16,7 +16,7 @@ Download and open Oracle VM VirtualBox.
 
 Click Machine > New, and add a name for your Domain Controller ("DC" or "DomainController").<br />
 Set the Type to "Microsoft Windows" and Version to "Windows 2019", and press Next.<br />
-(Note: I do not to link the ISO until I boot up the VM and am prompted to, because I've ran into issues doing so previously.)<br />
+*(Note: I do not to link the ISO until I boot up the VM and am prompted to, because I've ran into issues doing so previously.)*<br />
 
 For the following setup screens, these are the options I used:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hardware:<br />
@@ -39,13 +39,15 @@ Select the Virtual Machine you have just created, and press Settings:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: intnet<br />
 
 Select OK, click the Virtual Machine again, and select Start.<br />
-The virtual machine will load and ask you to link an ISO file. br />
+The virtual machine will load and ask you to link an ISO file.<br />
 Download and link the Server 2019 ISO and press "Mount and Retry Boot".<br />
-*We now have the Virtual Machine setup, the next steps will take place inside of Windows!*
 
-### **The Windows Setup Wizard**
+**We now have the Virtual Machine setup, the next steps will take place inside of Windows!**
 
-Continuing through the Windows Setup wizard, these are the options you should select when prompted to:<br />
+### **DC: Windows Setup Wizard**
+
+Continue through the Windows Setup wizard.<br />
+Select these are the options as they appear:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the operating system you want to install.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Windows Server 2019 Standard Evaluation (Desktop Experience)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which type of installation do you want?<br />
@@ -53,7 +55,7 @@ Continuing through the Windows Setup wizard, these are the options you should se
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click next to following screen to select the default partition.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customize Settings:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: Password1<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(To keep the lab simple, I suggest using the same password throughout the entire lab.)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*(To keep the lab simple, I suggest using the same password throughout the entire lab.)*<br />
 
 ### **Configuring NICs (Internal/External Networks)**
 Navigate to Control Panel > Network and Internet > Network and Sharing Center > Change Adapter Settings.<br />
@@ -61,7 +63,7 @@ Right click on the adapter named "Ethernet" > select Status.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify that it displays "IPv4 Connectivity: Internet", and close the window.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "Ethernet" again, choose Rename > and set the name to "\_INTERNET\_".<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "Ethernet 2", choose Rename > and set the name to "\_INTNET\_".<br />
-This will help make our networks more easily identifiable in the future.<br />
+*(This will help make our networks more easily identifiable in the future.)*<br />
 
 We will now change the IPv4 settings of the internal network to those in the diagram above.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right-click on "\_INTNET\_" > select Properties.<br />
@@ -76,9 +78,9 @@ We will now change the IPv4 settings of the internal network to those in the dia
 
 ### **Renaming the PC**
 Right-click on the Start Menu > select System.<br />
-Click the "Rename this PC" button.<br />
-Change the name of the device to "DC" for Domain Controller.<br />
-Choose the option to Restart now to apply the changes we have made so far.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click the "Rename this PC" button.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change the name of the device to "DC" for Domain Controller.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choose the option to Restart now to apply the changes we have made so far.<br />
 
 ### **Configuring Active Directory Domain Services**
 Now that we have configured our NICs, the next step is to setup our Domain (Active Directory Domain Server).<br />
@@ -246,6 +248,7 @@ Link the Windows 10 ISO that you have created, and press "Mount and Retry Boot".
 ### **Client VM: Windows Setup Wizard**
 
 Continuing through the Windows Setup wizard, these are the options you should select when prompted to:<br />
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activate Windows<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "I don't have a product key".<br />
 
@@ -295,4 +298,4 @@ Here are some examples of ways that I have used this lab, which I may go over in
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Learning how to set up Task Scheduler (for automated backups), creating scenarios of real-world issues and using Event Viewer logs and research to give yourself useful experience in solving issues that you will face in the real world in Information Technology. 
 
 Thank you for following along!<br />
-And a special thanks to Josh Madakor for helping me put this together. 
+And a special thanks to [Josh Madakor](https://www.youtube.com/@JoshMadakor) for his guides that help me put this together. 
