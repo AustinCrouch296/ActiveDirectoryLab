@@ -179,13 +179,33 @@ Navigate to Server Manager > Tools > DHCP<br />
 
 Inside of Server Manager:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select the Local Server tab on the left-hand side.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the properties set for "IE Enhanced Security Configuration: On"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the properties set for "IE Enhanced Security Configuration: On".<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change the setting to Off for both Administrators and Users.<br />
 
-
 ### **Populating the domain with test accounts using PowerShell**
+Download the PowerShell script from this repository onto the Server by copying this link and pasting it into Internet Explorer.<br />
+Download and open the .zip file, choose the Compressed Folder Tools options tab and press Extract all.<br />
+Browse to your Desktop folder and select Extract.<br />
+
+The *names.txt* file contians a list of names that our PowerShell script will use to populate our Active Directory with users accounts.<br />
+Open *names.txt*, add your own name to the file, and save it.<br />
+Run Windows PowerShell ISE as Administrator.<br />
+In PowerShell click File > Open and navigate to the AD_PS Folder/CREATE_USERS.ps1.<br />
+
+Type the command "Set-ExecutionPolicy Unrestricted" into the PowerShell Terminal, and press enter.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select "Yes to all" on the window that appears.<br />
+Type the command "cd C:\Users\j-smith\Desktop\ActiveDirectoryHomeLab".<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*(Replace "j-smith" with the username for the admin account that you created.)*<br />
+Press the Run Script button (or the F5 key) to start execute the script.<br />
+
+Now if you open Active Directory Users and Computers, expand mydomain.com, and click the _USERS folder, you can see all of the users inside!<br />
+*(Note that the way we formatted these user accounts is different than how we set up the admin account.)*<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For example mine is:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j-smith (Administrator)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jsmith (User)
 
 ### **Creating a Windows 10 "Client" Virtual Machine**
+
 
 ### **Experimenting with Group Policy**
 
