@@ -2,7 +2,7 @@
 <img src="/images/main_diagram.png">
 
 ## Introduction
-In this lab, I will explain the procedures necessary to set up and configure an Active Directory Domain Controller, a Windows 10 client machine, and create 1k+ user accounts using a PowerShell script, to create a simulated real-world network environment that can be used to explore Active Directory, Group Policy, and troubleshoot common issues.
+In this lab, I will explain how to set up and configure an Active Directory Domain Controller, a Windows 10 client machine to connect to it, and create 1k+ user accounts using a PowerShell script, to create a simulated real-world network environment that we can use to learn more about Active Directory, Group Policies, and troubleshoot common network issues.
 
 ### Files necessary to follow along:
 [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)<br />
