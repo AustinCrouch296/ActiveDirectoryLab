@@ -5,10 +5,10 @@
 In this lab, I will explain how to set up and configure an Active Directory Domain Controller, a Windows 10 client machine to connect to it, and create 1k+ user accounts using a PowerShell script, to create a simulated real-world network environment that we can use to learn more about Active Directory, Group Policies, and troubleshoot common network issues.
 
 ### Files necessary to follow along:
-[Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-[Windows Server 2019 ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)
-[Windows 10 ISO](https://www.microsoft.com/en-us/software-download/windows10)</a>
-[PowerShell Create Accounts Script (GitHub)](https://github.com/joshmadakor1/AD_PS)</a>
+- [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+- [Windows Server 2019 ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)
+- [Windows 10 ISO](https://www.microsoft.com/en-us/software-download/windows10)</a>
+- [PowerShell Create Accounts Script (GitHub)](https://github.com/joshmadakor1/AD_PS)</a>
 
 # Procedures
 ## **Creating a Windows Server 2019 Virtual Machine**
