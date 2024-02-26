@@ -70,7 +70,7 @@ Right click on the adapter named "Ethernet" > select Status.
 
 - Right-click on `_INTNET_` > select Properties.
 - Click Internet Protocol Version 4 (TCP/IPv4) > click Properties.
-    - General > Enable `Use the following IP Address:`
+    - General > Enable Use the following IP Address:
     - IP address: `172.16.0.1`
     - Mask: `255.255.255.0`
     - Gateway: `<empty>`
