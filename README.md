@@ -12,49 +12,51 @@ In this lab, I will explain how to set up and configure an Active Directory Doma
 
 # Procedures
 ## **Creating a Windows Server 2019 Virtual Machine**
-Download and open Oracle VM VirtualBox.
+Open VirtualBox, and select Machine > New
+- Name: Give the machine a memorable name like `DomainController` or `WinServer2019`
+- ISO Image: Leave as `<not selected>` for now - otherwise you may run into issues.
+- Type: `Microsoft Windows`
+- Version: `Windows 2019`
 
-Click Machine > New, and add a name for your Domain Controller ("DC" or "DomainController").
-Set the Type to "Microsoft Windows" and Version to "Windows 2019", and press Next.
-*(Note: I do not to link the ISO until I boot up the VM and am prompted to, because I've ran into issues doing so previously.)*
-
-For the following setup screens, these are the options I used:
+For the rest of the setup, these are the minimum configurations:
 - Hardware:
-    - Base Memory: 2048 MB
-    - Processors: 1
+    - Base Memory: `2048 MB or more`
+    - Processors: `1 or more`
 - Virtual Hard Disk:
-    - Disk Space: 20.00 GB
+    - Disk Space: `20.00 GB or more`
 
-Select the Virtual Machine you have just created, and press Settings:
+Select the Virtual Machine you created, and select Settings:
 - General > Advanced
-    - Shared Clipboard: Bidirectional
-    - Drag'n'Drop: Bidirectional
+    - Shared Clipboard: `Bidirectional`
+    - Drag'n'Drop: `Bidirectional`
 - Network > Adapter 1:
-    - Enable Network Adapter: True
-    - Attached to: NAT
+    - Enable Network Adapter: `True`
+    - Attached to: `NAT`
 - Network > Adapter 2:
-    - Enable Network Adapter: True
-    - Attached to: Internal Network
-    - Name: intnet
+    - Enable Network Adapter: `True`
+    - Attached to: `Internal Network`
+    - Name: `intnet`
 
-Select OK, click the Virtual Machine again, and select Start.
-The virtual machine will load and ask you to link an ISO file.
-Download and link the Server 2019 ISO and press "Mount and Retry Boot".
+Select OK to apply the changes, and then select Start.
 
-**We now have the Virtual Machine setup, the next steps will take place inside of Windows!**
+The VM should ask you to link an ISO file after loading.
+Attach the [Windows Server 2019 ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019) file and press "Mount and Retry Boot".
 
-## **DC: Windows Setup Wizard**
+**We have now finished setting up the Virtual Machine, next we will set up our installation of Windows!**
+
+## **Server 2019 Setup Wizard**
 
 Continue through the Windows Setup wizard.
 Select these are the options as they appear:
 - Select the operating system you want to install.
-    - Windows Server 2019 Standard Evaluation (Desktop Experience)
+    - `Windows Server 2019 Standard Evaluation (Desktop Experience)`
 - Which type of installation do you want?
-    - Custom: Install Windows only (advanced)
-    - Click next to following screen to select the default partition.
+    - Custom: `Install Windows only (advanced)`
+    - Select `Next` to following screen to select the default partition.
 - Customize Settings:
-    - Password: Password1
-    *(To keep the lab simple, I suggest using the same password throughout the entire lab.)*
+    - Password: `Password123!`
+
+*(To keep the lab simple, I suggest using the same password throughout the entire lab.)*
 
 ## **Configuring NICs (Internal/External Networks)**
 Navigate to Control Panel > Network and Internet > Network and Sharing Center > Change Adapter Settings.
@@ -62,9 +64,12 @@ Right click on the adapter named "Ethernet" > select Status.
 - Verify that it displays "IPv4 Connectivity: Internet", and close the window.
 - Right-click on "Ethernet" again, choose Rename > and set the name to "\_INTERNET\_".
 - Right-click on "Ethernet 2", choose Rename > and set the name to "\_INTNET\_".
+
 *(This will help make our networks more easily identifiable in the future.)*
 
-We will now change the IPv4 settings of the internal network to those in the diagram above.
+<img src="/images/internal_network_settings.png">
+
+**We will now change the IPv4 settings of the internal network to those in the diagram above.**
 - Right-click on "\_INTNET\_" > select Properties.
 - Click Internet Protocol Version 4 (TCP/IPv4) > click Properties.
     - General > Enable "Use the following IP Address:"
@@ -183,11 +188,9 @@ Open Server Manager > select "Add roles and features".
     - Change the setting to Off for both Administrators and Users.
 
 ## **Populating the domain with test accounts using PowerShell**
-Download the PowerShell script from this repository onto the Server by copying this link and pasting it into Internet Explorer.
-Download and open the .zip file, choose the Compressed Folder Tools options tab and press Extract all.
-Browse to your Desktop folder and select Extract.
-
-The *names.txt* file contians a list of names that our PowerShell script will use to populate our Active Directory with users accounts.
+Download the /powershell/ folder in tis  and users.txt file from this repository onto the your Windows VM.
+- [1_Create_Users.ps1](powershell/1_Create_Users.ps1): The PowerShell script that we will edit and run to create the accounts.
+- [names.txt](powershell/names.txt): Contains a list of names that our PowerShell script will use when populating our Active Directory with user accounts.
 
 Open *names.txt*, add your own name to the file, and save it.
 Run Windows PowerShell ISE as Administrator.
