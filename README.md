@@ -8,7 +8,6 @@ In this lab, I will explain how to set up and configure an Active Directory Doma
 - [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Windows Server 2019 ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)
 - [Windows 10 ISO](https://www.microsoft.com/en-us/software-download/windows10)</a>
-- [PowerShell Create Accounts Script (GitHub)](https://github.com/joshmadakor1/AD_PS)</a>
 
 # Procedures
 ## **Creating a Windows Server 2019 Virtual Machine**
@@ -65,11 +64,10 @@ Right click on the adapter named "Ethernet" > select Status.
 - Right-click on "Ethernet" again, choose Rename > and set the name to "\_INTERNET\_".
 - Right-click on "Ethernet 2", choose Rename > and set the name to "\_INTNET\_".
 
-*(This will help make our networks more easily identifiable in the future.)*
+**Next, we will configure the IPv4 settings for the internal network:**
 
 <img src="/images/internal_network_settings.png">
 
-**We will now change the IPv4 settings of the internal network to those in the diagram above.**
 - Right-click on "\_INTNET\_" > select Properties.
 - Click Internet Protocol Version 4 (TCP/IPv4) > click Properties.
     - General > Enable "Use the following IP Address:"
@@ -81,7 +79,7 @@ Right click on the adapter named "Ethernet" > select Status.
 
 ## **Renaming the PC**
 Right-click on the Start Menu > select System.
-- Click the "Rename this PC" button.
+- Click the `Rename this PC` button.
 - Change the name of the device to "DC" for Domain Controller.
 - Choose the option to Restart now to apply the changes we have made so far.
 
