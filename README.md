@@ -61,21 +61,21 @@ Select these are the options as they appear:
 Navigate to Control Panel > Network and Internet > Network and Sharing Center > Change Adapter Settings.
 Right click on the adapter named "Ethernet" > select Status.
 - Verify that it displays "IPv4 Connectivity: Internet", and close the window.
-- Right-click on "Ethernet" again, choose Rename > and set the name to "\_INTERNET\_".
-- Right-click on "Ethernet 2", choose Rename > and set the name to "\_INTNET\_".
+- Right-click on "Ethernet" again, choose Rename > and set the name to `_INTERNET_`.
+- Right-click on "Ethernet 2", choose Rename > and set the name to `_INTNET_`.
 
 **Next, we will configure the IPv4 settings for the internal network:**
 
 <img src="/images/internal_network_settings.png">
 
-- Right-click on "\_INTNET\_" > select Properties.
+- Right-click on `_INTNET_` > select Properties.
 - Click Internet Protocol Version 4 (TCP/IPv4) > click Properties.
-    - General > Enable "Use the following IP Address:"
-    - IP address: 172.16.0.1
-    - Mask: 255.255.255.0
-    - Gateway: &lt;empty&gt;
-    - Preferred DNS server: 127.0.0.1 (Loopback address)
-    - Alternate DNS server: &lt;empty&gt;
+    - General > Enable `Use the following IP Address:`
+    - IP address: `172.16.0.1`
+    - Mask: `255.255.255.0`
+    - Gateway: `<empty>`
+    - Preferred DNS server: `127.0.0.1` (Loopback address)
+    - Alternate DNS server: `<empty>`
 
 ## **Renaming the PC**
 Right-click on the Start Menu > select System.
